@@ -12,6 +12,7 @@ public class Util {
     private static final String DB_PASSWORD = "root";
 
     private Util (){}
+
     public static Connection getConnection() {
         Connection connection = null;
         try {

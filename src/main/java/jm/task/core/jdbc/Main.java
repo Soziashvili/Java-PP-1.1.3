@@ -10,7 +10,9 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Util util = Util.getInstance();
         util.getConnection();
+
         UserDao userService = new UserServiceImpl();
+
         userService.createUsersTable();
         userService.saveUser("Ben", "Affleck", (byte) 44);
         userService.saveUser("Christian", " Bale", (byte) 31);
