@@ -24,6 +24,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
             query.executeUpdate();
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -42,6 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
             query.executeUpdate();
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -57,6 +59,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
             session.save(new User(name, lastName, age));
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -70,8 +73,11 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            User user = session.load(User.class, id);
-            session.delete(user);
+            String hql = "DELETE User WHERE ID = :id";
+            Query query = session.createQuery(hql);
+
+            query.setParameter("id", id);
+            query.executeUpdate();
 
             transaction.commit();
         } catch (Exception e) {
@@ -92,6 +98,7 @@ public class UserDaoHibernateImpl implements UserDao {
             usersList = session.createCriteria(User.class).list();
 
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -112,6 +119,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
             query.executeUpdate();
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
